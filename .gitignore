@@ -7,3 +7,7 @@ dist/
 .DS_Store
 build-output.log
 EOF
+
+k8s/secrets.yaml
+k8s/postgres.yaml
+.kube/

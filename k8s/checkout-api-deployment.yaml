@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: checkout-api
+  namespace: freshcart
+
+spec:
+  replicas: 2
+  selector:
+    matchLabels: {app: checkout-api}
+  template:
+    metadata:
+       labels: {app: checkout-api}
+
+    spec:
+      containers:
+        - name: checkout-api
+          image: checkout-api:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: checkout-api-db
+                  key: DATABASE_URL
+
+          readinessProbe:
+            httpGet: 
+              path: /healthz 
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 5
+
+          livenessProbe:
+            httpGet: 
+              path: /healthz 
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+
+          resources:
+            requests: {cpu: "100m", memory: "128Mi"}
+            limits: {cpu: "250m", memory: "256Mi"}

@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: storefront
+  namespace: freshcart
+
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: storefront
+
+  template:
+    metadata:
+      labels:
+        app: storefront
+
+    spec:
+      containers:
+        - name: storefront
+          image: storefront-api:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          
+          resources:
+            requests: {cpu: "50m", memory: "64Mi"}
+            limits: {cpu: "150m", memory: "128Mi"}
