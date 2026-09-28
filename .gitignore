@@ -6,8 +6,8 @@ dist/
 *.log
 .DS_Store
 build-output.log
-EOF
 
+# Kubernetes sensitive files
 k8s/secrets.yaml
 k8s/postgres.yaml
 .kube/
