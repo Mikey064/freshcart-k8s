@@ -1,28 +1,28 @@
-# Ingress for Kind
+# Ingress for GKE
+
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 
 metadata:
-  name: freshcart-ingress
+  name: freshcart-gke-ingress
   namespace: freshcart
 
 spec:
-  ingressClassName: nginx
   rules:
     - http:
         paths:
           - path: /api
             pathType: Prefix
-            backend:
+            backend: 
               service:
                 name: checkout-api
                 port:
-                  number: 3000
+                  number: 80
 
           - path: /
             pathType: Prefix
-            backend:
+            backend: 
               service:
                 name: storefront
                 port:
-                  number: 8080
+                  number: 80

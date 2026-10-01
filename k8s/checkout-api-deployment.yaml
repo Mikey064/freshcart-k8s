@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: checkout-api
-          image: checkout-api:latest
+          image:  us-central1-docker.pkg.dev/freshcart-twotier/freshcart-repo/checkout-api:v1.1
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3000

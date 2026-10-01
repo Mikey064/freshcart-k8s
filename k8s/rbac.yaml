@@ -1,0 +1,43 @@
+# RoleBinding for CI/CD Pipeline access
+
+apiVersion: v1
+kind: ServiceAccount
+
+metadata: 
+  name: ci-deployer
+  namespace: freshcart
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+
+metadata:
+  name: freshcart-deployer
+  namespace: freshcart
+
+rules:
+  - apiGroups: ["apps"]
+    resources: ["deployments"]
+    verbs: ["get", "list", "watch", "update", "patch"]
+
+  - apiGroups: [""]
+    resources: ["pods", "services"]
+    verbs: ["get", "list", "watch"]
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+
+metadata:
+  name: freshcart-deployer-binding
+  namespace: freshcart
+
+subjects:
+  - kind: ServiceAccount
+    name: ci-deployer
+    namespace: freshcart
+
+roleRef:
+  kind: Role
+  name: freshcart-deployer
+  apiGroup: rbac.authorization.k8s.io
