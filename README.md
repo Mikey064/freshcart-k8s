@@ -121,5 +121,5 @@ kubectl -n freshcart get ingress -w   # wait for an external IP
 
 ## Related
 
-- Capstone blog series: Two-tier architecture → Dockerizing the services → Terraform on GCP → CI/CD pipeline → **this Kubernetes deployment**
+- Capstone blog series: Two-tier architecture → Dockerizing the services → Terraform on GCP → CI/CD pipeline → **Deploying FreshCart to Kubernetes**
 - Builds on the GCP infrastructure provisioned in the Terraform capstone and the images built/pushed by the GitHub Actions pipeline in the CI/CD capstone
